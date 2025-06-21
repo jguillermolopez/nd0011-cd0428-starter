@@ -51,7 +51,6 @@
     "long_description": "Create a blog to express your opinions, share your knowledge, or document your experiences. This is a great way to build an online presence and connect with others.",
     "card_image": "../images/blog_card.webp",
     "spotlight_image": "../images/blog_spotlight.webp"
-
   },
   {
     "project_id": "project_game",
