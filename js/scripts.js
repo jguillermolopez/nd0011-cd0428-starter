@@ -49,7 +49,6 @@ const loadProjects = async () => {
   if (!projects || !projects.length) return;
 
   const list = document.getElementById("projectList");
-  const spotlight = document.getElementById("projectSpotlight");
 
   projects.forEach((proj, index) => {
     const card = createElement("div", "projectCard");
@@ -138,9 +137,16 @@ const setupFormValidation = () => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const illegalCharRegex = /[^a-zA-Z0-9@._-]/;
 
+  // Live character count + error class toggle
   messageInput.addEventListener("input", () => {
     const count = messageInput.value.length;
     charCount.textContent = `Characters: ${count}/300`;
+
+    if (count > 300) {
+      charCount.classList.add("error");
+    } else {
+      charCount.classList.remove("error");
+    }
   });
 
   form.addEventListener("submit", (e) => {
@@ -153,6 +159,7 @@ const setupFormValidation = () => {
     const email = emailInput.value.trim();
     const message = messageInput.value.trim();
 
+    // Email validation
     if (!email) {
       emailError.textContent = "Email cannot be empty.";
       valid = false;
@@ -164,6 +171,7 @@ const setupFormValidation = () => {
       valid = false;
     }
 
+    // Message validation
     if (!message) {
       messageError.textContent = "Message cannot be empty.";
       valid = false;
@@ -175,11 +183,13 @@ const setupFormValidation = () => {
       valid = false;
     }
 
+    // Submit success
     if (valid) {
       alert("Form submitted successfully!");
       emailInput.value = "";
       messageInput.value = "";
       charCount.textContent = "Characters: 0/300";
+      charCount.classList.remove("error"); // Reset error color if it was applied
     }
   });
 };
